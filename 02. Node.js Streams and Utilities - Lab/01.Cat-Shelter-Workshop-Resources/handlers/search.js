@@ -65,11 +65,3 @@ module.exports = async (req, res) => {
 
 
 
-
-
-/*vizualizira Home page no samo s rezultatite 
-    -> moje da go realiziram v home.js ili v model.js
-    -> s GET ili POST zaqvka?
-    -> kak kachvam queritata v URL-a pri GET zaqvka    
-*/
-
