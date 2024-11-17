@@ -4,10 +4,10 @@ const handlers = require("./handlers");
 
 
 const server = http.createServer((request, response) => {
-    console.log("Received request");
+    console.log("Received request");    
 
     for (handler of handlers) {
-        if(!handler(request, response)){
+        if(!handler(request, response)){            
             console.log("Request is handeled");
             break;
         } else{
