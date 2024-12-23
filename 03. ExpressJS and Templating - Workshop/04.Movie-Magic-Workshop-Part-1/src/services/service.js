@@ -37,8 +37,6 @@ function populateMovieModel(movieData) {
     return movieObj;
 }
 
-
-
 async function getAllMovies() {
     const data = await readFile();
     const moviesAsObjects = data.map(movieData => populateMovieModel(movieData));
@@ -47,19 +45,10 @@ async function getAllMovies() {
 }
 
 async function getMovieById(id){
-    const data = await readFile();
-
-    console.log('data -->', data);
-    
-    const movieData = data.find(movie => movie.id === id);// Tuka se chupi!!!
-
-    console.log('movieData -->', movieData);
+    const data = await readFile();    
+    const movieData = data.find(movie => movie.id === id);    
     
     const movieAsObject = movieData ? populateMovieModel(movieData) : movieData;
-
-    console.log('movieAsObject -->', movieAsObject);
-    
-
     return movieAsObject;
 }
 
@@ -73,13 +62,6 @@ async function createMovie(movieData) {
     await writeFile(database);     
     return movieObj;
 }
-
-// async function editMovie(movieId) {
-//     const data = await readFile();
-//     const movieToEdit = data.find(movie => movie.id === movieId);
-
-//     //TODO
-// }
 
 
 module.exports = {
