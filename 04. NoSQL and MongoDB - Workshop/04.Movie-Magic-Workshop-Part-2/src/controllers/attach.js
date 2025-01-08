@@ -1,5 +1,5 @@
 const { getAllCast, attachMovieToCast } = require('../services/castService');
-const { attachCastToMovie, getMovieById } = require('../services/movieService');
+const { attachCastToMovie, removeCastFromMovie, getMovieById } = require('../services/movieService');
 
 module.exports = {
     attachGet: async (req, res) => {
@@ -13,9 +13,14 @@ module.exports = {
 
         let allCast = await getAllCast();
 
-        //Filter only cast that are not already attached to the movie
+        //Filter only cast that are not already attached to a movie
+        allCast = allCast.filter(castProxy => !!castProxy.movie === false);
+
+        /*
+        //Filter only cast that are not already attached to THAT movie
         const movieCastAsArrayOfStrings = movie.cast.map(cast => cast._id = cast._id.toString());
         allCast = allCast.filter(castProxy => !movieCastAsArrayOfStrings.includes(castProxy._id.toString()));
+        */
 
         res.render('cast-attach', { pageTitle: 'Attach Cast', movie, allCast });
     },
@@ -45,19 +50,24 @@ module.exports = {
 
             let allCast = await getAllCast();
 
-            //Filter only cast that are not already attached to the movie
+            //Filter only cast that are not already attached to a movie
+            allCast = allCast.filter(castProxy => !!castProxy.movie === false);
+
+            /*
+            //Filter only cast that are not already attached to THAT movie
             const movieCastAsArrayOfStrings = movie.cast.map(cast => cast._id = cast._id.toString());
             allCast = allCast.filter(castProxy => !movieCastAsArrayOfStrings.includes(castProxy._id.toString()));
+            */
 
             res.render('cast-attach', { pageTitle: 'Attach Cast', movie, allCast, emptyCast });
             return;
         }
 
-        try {
-            await attachCastToMovie(movieId, castId);
+        try {            
+            await attachCastToMovie(movieId, castId);         
 
         } catch (err) {
-            console.error(`Failed to add cast to movie --> ${err}`);
+            console.error(`Failed to add cast to movie --> ${err}`);            
 
             res.status(400).end();
             return;
@@ -70,7 +80,9 @@ module.exports = {
         } catch (err) {
             console.error(`Failed to add movie to cast --> ${err}`);
 
-            //TODO Delete cast that is already added to <cast> array of the movie!!!
+            //Delete cast that is already added to <cast> array of the movie
+            await removeCastFromMovie(movieId, castId);
+            console.log('Removed the cast:', castId, 'that was already added to <cast> array of the movie', movieId);                        
 
             res.status(400).end();
             return;

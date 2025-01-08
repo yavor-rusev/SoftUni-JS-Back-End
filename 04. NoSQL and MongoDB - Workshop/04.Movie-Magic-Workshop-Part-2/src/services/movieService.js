@@ -29,12 +29,10 @@ async function createMovie(movieData) {
 }
 
 async function attachCastToMovie(movieId, castId) {
-    const movieProxy = await MovieModel.findById(movieId);    
-
-    const castAsArrayOfStrings = movieProxy.cast.map(objectId => objectId.toString());    
+    const movieProxy = await MovieModel.findById(movieId);   
 
     //Check if cast is already attached to this movie
-    if (!castAsArrayOfStrings.includes(castId)) {
+    if (!movieProxy.cast.includes(castId)) {
         movieProxy.cast.push(castId);
         await movieProxy.save();
     } else {
@@ -45,10 +43,27 @@ async function attachCastToMovie(movieId, castId) {
     return movieProxy;
 }
 
+async function removeCastFromMovie(movieId, castId) {
+    const movieProxy = await MovieModel.findById(movieId);
+    
+    const castIndex = movieProxy.cast.indexOf(castId);
+
+    if(castIndex !== -1) {        
+        movieProxy.cast.splice(castIndex, 1);
+        await movieProxy.save();        
+    } else {
+        console.log('Cast does not exist in this movie');
+        return movieProxy;
+    }
+
+    return movieProxy;    
+}
+
 
 module.exports = {
     getAllMovies,
     getMovieById,
     createMovie,
-    attachCastToMovie
+    attachCastToMovie,
+    removeCastFromMovie
 };
