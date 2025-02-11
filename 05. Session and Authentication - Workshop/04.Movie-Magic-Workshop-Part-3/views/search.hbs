@@ -1,0 +1,23 @@
+<section id="search">
+    <h1>Search</h1>
+    <form method="get" class="form">
+        <input type="text" class="search" name="title" placeholder="Title..." value="{{search.title}}">
+        <input type="text" class="genre" name="genre" placeholder="Genre..." value="{{search.genre}}">
+        <input type="number" class="year" name="year" placeholder="Year..." value="{{search.year}}">
+        <input type="submit" value="search">
+    </form>
+</section>
+
+<section id="catalog">
+    <div class="band">
+        {{#each results}}
+        <!-- If there are posts for movie in the database display each of them -->
+            {{> movieCard}}
+        {{else}}
+        <!-- If there are no posts matched display: -->
+            <div class="no-posts">
+                <p class="no-offer">There are no movies matched...</p>
+            </div>
+        {{/each}}
+    </div>
+</section>
