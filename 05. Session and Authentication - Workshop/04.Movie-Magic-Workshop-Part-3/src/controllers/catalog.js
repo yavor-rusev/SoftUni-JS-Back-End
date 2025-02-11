@@ -62,6 +62,13 @@ module.exports = {
             //Convert rating to stars
             movie['starRating'] = '&#x2605'.repeat(movie.rating);
 
+            // Check if user is author           
+            const isAuthor = req.user && req.user._id === movie.author.toString();
+
+            if(isAuthor) {
+                movie.isAuthor = isAuthor;
+            }           
+
             res.render('details', { pageTitle: 'Details', movie });
 
         } catch (err) {

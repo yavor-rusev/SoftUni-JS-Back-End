@@ -6,7 +6,10 @@ module.exports = {
         const movieId = req.params.id;
         const movie = await getMovieById(movieId);
 
-        if (!movie) {
+        // Check if user is author           
+        const isAuthor = req.user && req.user._id === movie.author.toString();
+
+        if (!movie || !isAuthor) {
             res.render('404', { pageTitle: 'Error' });
             return;
         }
@@ -43,7 +46,10 @@ module.exports = {
 
             const movie = await getMovieById(movieId);
 
-            if (!movie) {
+            // Check if user is author           
+            const isAuthor = req.user && req.user._id === movie.author.toString();
+
+            if (!movie || !isAuthor) {
                 res.render('404', { pageTitle: 'Error' });
                 return;
             }

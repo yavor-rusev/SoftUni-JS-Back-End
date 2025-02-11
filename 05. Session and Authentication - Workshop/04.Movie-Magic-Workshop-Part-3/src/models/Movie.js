@@ -43,6 +43,9 @@ const movieSchema = new mongoose.Schema({
     author: {
         type: mongoose.SchemaTypes.ObjectId,
         required: true
+    },
+    isAuthor: {
+        type: Boolean
     }
 });
 
