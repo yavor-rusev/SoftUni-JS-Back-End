@@ -1,8 +1,5 @@
 const { getAllMovies, getMovieById } = require('../services/movieService');
 
-
-// mahni logovete!!!!
-
 module.exports = {
     homeController: async (req, res) => {        
         try {
@@ -15,15 +12,12 @@ module.exports = {
             res.render('home', { pageTitle: 'Home', movies });
 
         } catch (err) {
-            console.log(err);
-            res.redirect('404');
+            console.log('homeController() ->', err.message);
+            res.render('404', { pageTitle: 'Error - ' + err.message });
         }
     },
 
-    searchController: async (req, res) => {
-        console.log('request cookies -> ', req.cookies); //!!!!   
-        console.log('request user -> ', req.user);    //!!!!!
-        
+    searchController: async (req, res) => {        
         const search = req.query;
         
         search.title = search.title?.trim();
@@ -72,8 +66,8 @@ module.exports = {
             res.render('details', { pageTitle: 'Details', movie });
 
         } catch (err) {
-            console.log(err);
-            res.redirect('404');
+            console.log('detailsController() ->', err.message);
+            res.render('404', { pageTitle: 'Error - ' + err.message });
         }
     }
 };

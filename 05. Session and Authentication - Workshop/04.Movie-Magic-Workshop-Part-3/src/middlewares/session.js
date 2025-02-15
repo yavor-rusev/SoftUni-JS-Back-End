@@ -11,14 +11,14 @@ function session() {
                 // Check if token is valid and throw error if false
                 const payload = verifyToken(token);
     
-                // Attach user data (session) as property to request if token is valid
+                // Attach user data (session) as property to <request> if token is valid
                 req.user = payload;
 
                 // Attach <hasUser> property to global context object <locals> that is visible for Handelbars layouts
                 res.locals.hasUser = true;               
 
             } catch(err) {
-                // Clear token-cookie if token is invalid
+                // Clear token-cookie if token is incorrect or expired
                 console.log('Session middleware throw error ->', err.message);                
                 res.clearCookie('token');                
             }

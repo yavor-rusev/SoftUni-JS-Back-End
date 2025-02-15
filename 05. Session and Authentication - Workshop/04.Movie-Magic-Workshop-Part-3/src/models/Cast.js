@@ -34,13 +34,3 @@ const CastModel = model('Cast', castSchema);
 
 module.exports = { CastModel };
 
-
-/*
-•	name – String, required 
-•	age – Number, required, max and min value 
-•	born – String, required 
-•	name in movie – String, required 
-•	cast image – String, required, http/https validation 
-•	movie – ObjectId, ref Movie Model 
-*/
-//TODO

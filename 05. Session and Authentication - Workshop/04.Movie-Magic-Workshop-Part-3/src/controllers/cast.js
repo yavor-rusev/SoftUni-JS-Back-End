@@ -56,7 +56,13 @@ module.exports = {
         }
 
         //Add to database
-        await createCast(inputData);
+        try{
+            await createCast(inputData);
+        }catch(err) {
+            res.render('404', { pageTitle: 'Error - ' + err.message });
+            return;
+        }
+        
         res.redirect('/');          
     }
 };

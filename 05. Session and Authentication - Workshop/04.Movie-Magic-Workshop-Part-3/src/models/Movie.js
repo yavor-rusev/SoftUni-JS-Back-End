@@ -52,35 +52,3 @@ const movieSchema = new mongoose.Schema({
 const MovieModel = mongoose.model('Movie', movieSchema);
 
 module.exports = { MovieModel };
-
-
-/*
-  title – String, required 
-  genre – String, required 
-  director – String, required 
-  year – Number, required, max and min value 
-  rating – Number, required, max and min value 
-  description – String, required, max length validation 
-  imageURL – String, required, http/https validation 
-  cast – a collection of ObjectIds, ref Cast Model 
-*/
-
-
-
-
-// class MovieModel {    
-//     constructor() {         
-//         this.id = null;
-//         this.title = null;
-//         this.genre = null;
-//         this.director = null;
-//         this.year = null;
-//         this.imageURL = null;
-//         this.rating = null;
-//         this.description = null;  
-//     }     
-// };
-
-// module.exports = {
-//     MovieModel
-// };

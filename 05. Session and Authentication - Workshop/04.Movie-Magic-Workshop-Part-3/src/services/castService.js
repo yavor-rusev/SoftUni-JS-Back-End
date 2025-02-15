@@ -1,4 +1,5 @@
 const { CastModel } = require('../models/Cast');
+const { MovieModel } = require('../models/Movie');
 
 async function getAllCast() {
     const castAsPlainObjects = await CastModel.find().lean();
@@ -28,9 +29,28 @@ async function attachMovieToCast(castId, movieId) {
     return castProxy;
 }
 
+async function removeMovieFromCast(movieId, userId) {
+    const movie = await MovieModel.findById(movieId);
+
+    if(!movie) {
+        throw new Error('Movie not found');
+    }
+
+    if(movie.author.toString() !== userId) {
+        throw new Error('Access denied');
+    }
+    
+    try{
+        await CastModel.updateMany({ movie: movieId }, {$unset: { movie: '' } });
+    }catch(err) {
+        console.log('removeMovieFromCast() error ->', err.message);
+        throw new Error('Failed to remove movie from cast before deleting movie');       
+    }
+}
 
 module.exports = {
     getAllCast,
     createCast,
-    attachMovieToCast
+    attachMovieToCast,
+    removeMovieFromCast
 };

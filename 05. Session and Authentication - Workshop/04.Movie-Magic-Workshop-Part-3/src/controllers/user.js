@@ -44,9 +44,7 @@ module.exports = {
         res.render('login', { pageTitle: 'Login' });
     },
 
-    loginPost: async (req, res) => {
-        console.log('login post');
-        
+    loginPost: async (req, res) => {        
         const {email, password} = req.body;
 
         try{
@@ -55,7 +53,7 @@ module.exports = {
                 throw new Error('All fields are requiered!');
             }
 
-            // Get authenticated user
+            // Get authenticated user or throw error
             const user = await login(email, password);
 
             // Create user token
