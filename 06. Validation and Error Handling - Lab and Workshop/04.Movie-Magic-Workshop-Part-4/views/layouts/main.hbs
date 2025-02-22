@@ -12,11 +12,15 @@
 
     <div id="box">
         
+        {{#if hasErrors}}
         <div class="error-container">
-            <p>
-                {{errorMessage}}
-            </p>
+            {{#each hasErrors}}
+                {{#each this}}
+                    <p>{{this}}</p>
+                {{/each }}
+            {{/each }}
         </div>
+        {{/if}}
 
         <nav>
             <!-- Do not forget to change the path to the image -->
