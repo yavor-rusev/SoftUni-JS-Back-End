@@ -6,10 +6,10 @@ function configHandlebars(app) {
         {extname: '.hbs'}
     );
 
-    //Add handelbars.engine as engine that handles '.hbs' files
+    //Add <handelbars.engine> as engine that handles '.hbs' files
     app.engine('.hbs', hbsInstance.engine);
 
-    //Set that the engine which handles '.hbs' files (handelbars.engine) is of type 'view engine', which means that the '.hbs' files are templates
+    //Set that the engine which handles '.hbs' files (<handelbars.engine>) is of type 'view engine', which means that the '.hbs' files are templates
     app.set('view engine', '.hbs');
 }
 

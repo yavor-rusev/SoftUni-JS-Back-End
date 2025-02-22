@@ -1,8 +1,8 @@
 const express = require('express');
-const {configMongoose} = require('./config/mongooseConfig');
-const {configHandlebars} = require('./config/handlebarsConfig');
-const {configExpress} = require('./config/expressConfig');
-const {router} = require('./config/routes');
+const { configMongoose } = require('./config/mongooseConfig');
+const { configHandlebars } = require('./config/handlebarsConfig');
+const { configExpress } = require('./config/expressConfig');
+const { configRoutes } = require('./config/routes');
 
 const PORT = process.env.port || 3000;
 
@@ -12,7 +12,7 @@ async function start() {
     await configMongoose();
     configHandlebars(app);
     configExpress(app);
-    app.use(router);
+    configRoutes(app);
     
     app.listen(PORT, () => {
         console.log(`Application running on port ${PORT}`);        
