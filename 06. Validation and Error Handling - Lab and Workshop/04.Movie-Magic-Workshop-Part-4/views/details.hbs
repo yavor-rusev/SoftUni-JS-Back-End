@@ -1,0 +1,49 @@
+{{#with movie}}
+<section id="details-page">    
+
+    <div class="main_card">
+        <div class="card_left">
+            <div class="card_datails">
+                <h1>{{title}}</h1>
+
+                <div class="card-movie">
+                    <div class="first-info">
+                        <p class="card-genre">Genre: {{genre}}</p>
+                        <p class="card-director">Directror: {{director}}</p>
+                    </div>
+                    <div class="second-info">
+                        <p class="card-year">Year: {{year}}</p>
+                        <p class="card-ranking">Rating: <span id="stars">{{{starRating}}}</span></p>
+                    </div>
+                </div>
+
+                <p class="disc">Description: {{description}}</p>
+            </div>
+            
+            {{#if isAuthor}}
+                <div class="details-btn">
+                    <a id="edit-button" href="/edit/movie/{{_id}}">Edit</a>
+                    <a id="delete-button" href="/delete/movie/{{_id}}">Delete</a>
+                </div> 
+            {{/if}}           
+        </div>
+
+        <div class="card_right">
+            <img src="{{imageURL}}" alt="image">
+        </div>        
+    </div> 
+
+    {{#if isAuthor}}
+        <div class="back" style="display: flex; justify-content: center; align-items: center; height: 20vh;" >            
+            <a href="/attach/cast/{{_id}}" class="details">Attach Cast</a>
+        </div>
+    {{/if}}
+
+    <div class="main-cast-card">
+       {{#each cast}}
+            {{> castCard}}
+       {{/each}}
+    </div>
+   
+</section>
+{{/with}}
