@@ -1,5 +1,3 @@
-
-- sloji noviq css
 - prepravi s originalnite notifikacii
 - napravi express validaciite
 - napravi Mongoose validaciite

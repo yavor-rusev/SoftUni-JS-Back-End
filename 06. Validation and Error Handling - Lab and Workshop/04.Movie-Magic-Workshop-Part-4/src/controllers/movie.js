@@ -1,12 +1,23 @@
+const { Router } = require('express');
+
+const { isUser } = require('../middlewares/guards');
 const { removeMovieFromCast } = require('../services/castService');
 const { createMovie, getMovieById, upadateMovie, deleteMovie } = require('../services/movieService');
 
-module.exports = {
-    createGet: (req, res) => {
-        res.render('movie-create', { pageTitle: 'Create Movie' });
-    },
+const movieRouter = Router();
 
-    createPost: async (req, res) => {
+movieRouter.get(
+    '/create/movie',
+    isUser(),
+    (req, res) => {
+        res.render('movie-create', { pageTitle: 'Create Movie' });
+    }
+);
+
+movieRouter.post(
+    '/create/movie',
+    isUser(),
+    async (req, res) => {
         const inputData = req.body;        
         
         //Set <errors> property as <true> if <inputData> is empty string (falsy value)
@@ -27,7 +38,7 @@ module.exports = {
             description: false,
             imageURL: false
         };
-
+    
         const errorMessages = {
             hasMessage: false,
             emptyField: false,
@@ -36,20 +47,20 @@ module.exports = {
             invalidDescription: false,
             invalidImageURL: false
         };
-
+    
         //Check for empty fields
         if (Object.values(emptyFields).includes(true) ) {
             errorMessages.emptyField = true;
             errorMessages.hasMessage = true;        
         }
-
+    
         //Check if years is more than 1877
         if (inputData.year !== '' && Number(inputData.year) < 1878) {            
             invalidValues.year = true;
             errorMessages.invalidYear = true;
             errorMessages.hasMessage = true;            
         }
-
+    
         //Check if rating is between 1 and 5
         if (inputData.rating !== '' && (Number(inputData.rating) < 1 || Number(inputData.rating) > 5)) {            
             invalidValues.rating = true;
@@ -79,7 +90,7 @@ module.exports = {
         
         // Get logged user ID from <user> (session) property
         const authorId = req.user._id;
-
+    
         //Add to database
         try{
             await createMovie(inputData, authorId);
@@ -89,23 +100,27 @@ module.exports = {
         }        
         
         res.redirect('/');
-    },
+    }
+);
 
-    editGet: async (req, res) => {
+movieRouter.get(
+    '/edit/movie/:id',
+    isUser(), 
+    async (req, res) => {
         const movieId = req.params.id;
-
+    
         if (!movieId) {
             console.log(`Missing movie ID - ${movieId}`);
-
+    
             res.status(400).end();
             return;
         }
-
+    
         let movieAsPlainObject; 
-
+    
         try{
             movieAsPlainObject = await getMovieById(movieId);
-
+    
             // Check if movie exist
             if(!movieAsPlainObject) {
                 throw new Error('Movie not found');            
@@ -117,19 +132,23 @@ module.exports = {
             res.render('404', { pageTitle: 'Error - ' + err.message });
             return;
         }
-
+    
         // Check if user is author           
         const isAuthor = req.user && req.user._id === movieAsPlainObject.author.toString();
-
+    
         if (!isAuthor) {
             res.redirect('/login');
             return;
         }
-
+    
         res.render('movie-edit', {pageTitle: 'Edit Movie', inputData: movieAsPlainObject});
-    },
+    }
+);
 
-    editPost: async(req, res) => {        
+movieRouter.post(
+    '/edit/movie/:id',
+    isUser(),
+    async(req, res) => {        
         // Get new input data
         const inputData = req.body;        
         
@@ -215,7 +234,7 @@ module.exports = {
         try{
             // Update movie in database
             await upadateMovie(movieId, inputData, userId);
-
+    
         } catch(err) {
             if(err.message === 'Access denied') {
                 res.redirect('/login');
@@ -224,25 +243,29 @@ module.exports = {
             }
             return;
         }
-
+    
         res.redirect('/details/' + movieId);        
-    },
+    }
+);
 
-    deleteGet: async (req, res) => {
+movieRouter.get(
+    '/delete/movie/:id',
+    isUser(),
+    async (req, res) => {
         const movieId = req.params.id;
-
+    
         if (!movieId) {
             console.log(`Missing movie ID - ${movieId}`);
-
+    
             res.status(400).end();
             return;
         }
-
+    
         let movie; 
-
+    
         try{
             movie = await getMovieById(movieId);
-
+    
             // Check if movie exist
             if(!movie) {
                 throw new Error('Movie not found');            
@@ -254,20 +277,24 @@ module.exports = {
             res.render('404', { pageTitle: 'Error - ' + err.message });
             return;
         }
-
+    
         // Check if user is author           
         const isAuthor = req.user && req.user._id === movie.author.toString();
-
+    
         if (!isAuthor) {
             res.redirect('/login');
             return;
         }
-
+    
         res.render('movie-delete', {pageTitle: 'Delete Movie', movie});
+    
+    }
+);
 
-    },
-
-    deletePost: async (req, res) => {
+movieRouter.post(
+    '/delete/movie/:id',
+    isUser(),
+    async (req, res) => {
         const movieId = req.params.id;       
         
         if (!movieId) {
@@ -286,7 +313,7 @@ module.exports = {
             
             // Delete movie from database
             await deleteMovie(movieId, userId);
-
+    
         } catch(err) {
             if(err.message === 'Access denied') {
                 res.redirect('/login');            
@@ -295,7 +322,10 @@ module.exports = {
             }
             return;
         }        
-
+    
         res.redirect('/');        
     }
-};
+);
+
+
+module.exports = { movieRouter };

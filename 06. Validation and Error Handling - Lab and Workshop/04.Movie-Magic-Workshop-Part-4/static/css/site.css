@@ -145,6 +145,14 @@ footer {
 
 }
 
+.error label, .error label.select, .error p  {
+    color: red;
+}
+
+.error input.inputFields, .error textarea.inputFields, .error select{
+    border-color: red;
+}
+
 .error-container {
     -moz-animation: cssAnimation 0s ease-in 2s forwards;
     /* Firefox */
