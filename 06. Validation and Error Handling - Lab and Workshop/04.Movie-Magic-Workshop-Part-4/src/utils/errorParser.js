@@ -13,6 +13,7 @@ function parseError(err) {
         // Express-validator error
         let errors = {}; 
         
+        // Works with more than one error message per validated field if there is no <bail()> used after each validation
         err.forEach(e => {            
 
             if(!errors[e.path]) {

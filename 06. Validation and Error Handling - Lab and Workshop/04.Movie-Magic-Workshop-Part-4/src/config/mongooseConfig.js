@@ -22,8 +22,6 @@ async function configMongoose() {
 //     const firstUser = await UserModel.findOne();
 
 //     await MovieModel.updateMany({}, { $set: { author: firstUser._id }});
-
-// 67a78bd714fb0cfcd168acc4
 // }
 
 module.exports = {

@@ -11,11 +11,14 @@
 <body>
 
     <div id="box">
-        
+        <!-- Object that contains array with error messages for every field that has failed validation -->        
         {{#if hasErrors}}
         <div class="error-container">
+        <!-- Works with more than one error message per validated field if there is no <bail()> used after each validation -->
             {{#each hasErrors}}
+            <!-- Array with all error messages for certain validated field -->
                 {{#each this}}
+                <!-- Each error message in the array -->
                     <p>{{this}}</p>
                 {{/each }}
             {{/each }}
