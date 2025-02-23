@@ -91,14 +91,33 @@ userRouter.get(
 userRouter.post(
     '/login',
     isGuest(),
+
+    //Email should end in @x.x, where x is one or more English letters/digits and should be at least 10 characters long
+    body('email').trim()
+        .notEmpty().withMessage('Email is required').bail()
+        .matches(/^[a-zA-Z0-9@.]+$/).withMessage('Email must contain only English letters and digits').bail()
+        .isEmail().withMessage('Incorrect email format').bail()
+        .isLength({min: 10}).withMessage('Email must be at least 10 characters long')        
+    ,
+
+    //Password should consist only of English letters and digits, ans should be at least 6 characters long 
+    body('password').trim()
+        .notEmpty().withMessage('Password is required').bail()
+        .isAlphanumeric().withMessage('Password must contain only English letters and digits').bail()
+        .isLength({min: 6}).withMessage('Password must be at least 6 characters long')        
+    ,
+
     async (req, res) => {        
         const {email, password} = req.body;
     
         try{
-            //Validate input data
-            if(!email || !password) {
-                throw new Error('All fields are requiered!');
-            }
+            // Extract <result> object that express-validation has attached to <request>
+            const result = validationResult(req);            
+
+            // Check if there are any errors in <result.errors> array - throw the array if true
+            if(result.errors.length) {                
+                throw result.errors;
+            }            
     
             // Get authenticated user or throw error
             const user = await login(email, password);
@@ -112,9 +131,15 @@ userRouter.post(
             res.redirect('/');
     
         } catch(err) {
-            console.log('catched login error ->', err.message);
+            console.log('catched login error');
+
+            // Parse generic errors, express-validator errors and mongoose errors to structure compatible with <handelbars> templates
+            const errors = parseError(err);
+
+            // Pass errors to <handelbars> layout template
+            res.locals.hasErrors = errors;
     
-            res.render('login', { pageTitle: 'Login', inputData: { email }, errorMessage: err.message});
+            res.render('login', { pageTitle: 'Login', inputData: { email }, errors});
             return;
         }        
     }

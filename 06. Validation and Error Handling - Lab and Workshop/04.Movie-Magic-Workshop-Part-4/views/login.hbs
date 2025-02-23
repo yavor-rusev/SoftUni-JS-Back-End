@@ -5,20 +5,14 @@
             <h2>"My mama always said life was like a box of chocolates. You never know what you're gonna get."</h2>
         </div>
         <form method="post" class="loginForm">
-            <h2>Login</h2>
-
-            {{#if errorMessage}}
-            <div class="error" >
-                <p>{{errorMessage}}</p>                                 
-            </div>
-            {{/if}} 
+            <h2>Login</h2>            
 
             <ul class="noBullet">
-                <li>
+                <li {{#if errors.email}} class="error" {{/if}} >
                     <label for="email">Email:</label>
-                    <input type="text" class="inputFields" id="email" name="email" {{#if errorMessage}} value="{{inputData.email}}" {{/if}} />
+                    <input type="text" class="inputFields" id="email" name="email" {{#if errors}} value="{{inputData.email}}" {{/if}} />
                 </li>
-                <li>
+                <li {{#if errors.password}} class="error" {{/if}} >
                     <label for="password">Password:</label>
                     <input type="password" class="inputFields" id="password" name="password" />
                 </li>

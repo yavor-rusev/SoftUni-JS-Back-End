@@ -6,92 +6,40 @@
         </div>
 
         <form method="post" class="createForm">
-            <h2>Add Movie</h2>
-
-            {{#if errorMessages.hasMessage}}
-            <div class="error" >
-                {{#if errorMessages.emptyField}}
-                    {{> emptyFieldMessage}}
-                {{/if}}
-
-                {{#if errorMessages.invalidYear}}
-                    {{> invalidYearMessage}}
-                {{/if}} 
-
-                {{#if errorMessages.invalidRating}}
-                    {{> invalidRatingMessage}}
-                {{/if}}
-
-                {{#if errorMessages.invalidDescription}}
-                    {{> invalidDescriptionMessage}}
-                {{/if}}
-
-                {{#if errorMessages.invalidImageURL}}
-                    {{> invalidImageURLMessage}}
-                {{/if}}                     
-            </div>
-            {{/if}}
+            <h2>Add Movie</h2>           
              
             <ul class="noBullet">
-                <li {{#if emptyFields.title}} class="error" {{/if}}>
+                <li {{#if errors.title}} class="error" {{/if}} >
                     <label for="title" >Title:</label>
                     <input type="text" class="inputFields" id="title" name="title" value="{{inputData.title}}" />
                 </li>
 
-                <li {{#if emptyFields.genre}} class="error" {{/if}}>
+                <li {{#if errors.genre}} class="error" {{/if}} >
                     <label for="genre">Genre:</label>
                     <input type="text" class="inputFields" id="genre" name="genre" value="{{inputData.genre}}" />
                 </li>
 
-                <li {{#if emptyFields.director}} class="error" {{/if}}>
+                <li {{#if errors.director}} class="error" {{/if}} >
                     <label for="director">Director:</label>
                     <input type="text" class="inputFields" id="director" name="director" value="{{inputData.director}}" />
                 </li>
 
-                <li {{#if emptyFields.year}} 
-                        class="error" 
-                    {{else}}
-                        {{#if invalidValues.year}} 
-                            class="error"
-                        {{/if}}
-                    {{/if}}>
-
+                <li {{#if errors.year}} class="error" {{/if}} >
                     <label for="year">Year:</label>
                     <input type="number" class="inputFields" id="year" name="year" value="{{inputData.year}}" />
                 </li>
 
-                <li {{#if emptyFields.imageURL}} 
-                        class="error" 
-                    {{else}}
-                        {{#if invalidValues.imageURL}} 
-                            class="error"
-                        {{/if}}
-                    {{/if}}>
-
+                <li {{#if errors.imageURL}} class="error" {{/if}} >
                     <label for="image">Movie Poster:</label>
                     <input type="text" class="inputFields" id="image" name="imageURL" value="{{inputData.imageURL}}" />
                 </li>
 
-                <li {{#if emptyFields.rating}} 
-                        class="error" 
-                    {{else}}
-                        {{#if invalidValues.rating}} 
-                            class="error"
-                        {{/if}}
-                    {{/if}}>
-                    
+                <li {{#if errors.rating}} class="error" {{/if}} >                    
                     <label for="rating">Rating:</label>
-                    <input type="text" class="inputFields" id="rating" name="rating" value="{{inputData.rating}}" />
+                    <input type="number" class="inputFields" id="rating" name="rating" value="{{inputData.rating}}" />
                 </li>
 
-                <li {{#if emptyFields.description}} 
-                        class="error" 
-                    {{else}}
-                        {{#if invalidValues.description}} 
-                            class="error"
-                        {{/if}}
-                    {{/if}}>
-                    
+                <li {{#if errors.description}} class="error" {{/if}} >                    
                     <label for="description">Description:</label>
                     <textarea id="description" class="inputFields" name="description">{{inputData.description}}</textarea>
                 </li>

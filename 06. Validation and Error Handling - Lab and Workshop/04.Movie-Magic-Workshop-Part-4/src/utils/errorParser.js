@@ -3,6 +3,12 @@ function parseError(err) {
         if(!err.errors) {
             // Generic or MongoDB error 
             console.log('Generic or MongoDB error ->', err);
+
+            let errors = {};
+            errors.message = [err.message];
+
+            console.log('Generic or MongoDB error parsed ->', errors);
+            return errors;           
             
         } else {
             // Mongoose error
@@ -11,8 +17,10 @@ function parseError(err) {
 
     }else if (Array.isArray(err)) {
         // Express-validator error
-        let errors = {}; 
+        console.log('Express-validator error ->', err);         
         
+        let errors = {};
+
         // Works with more than one error message per validated field if there is no <bail()> used after each validation
         err.forEach(e => {            
 
@@ -23,10 +31,9 @@ function parseError(err) {
             errors[e.path].push(e.msg);            
         });         
        
-        console.log('Validator error ->', errors);
-        
+        console.log('Validator error parsed ->', errors);
         return errors;        
-    } 
+    }    
 }
 
 module.exports = { parseError };
