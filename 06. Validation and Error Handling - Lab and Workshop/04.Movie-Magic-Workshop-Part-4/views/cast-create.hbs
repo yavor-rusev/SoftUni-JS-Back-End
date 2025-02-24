@@ -5,57 +5,30 @@
         </div>
 
         <form method="post" class="createCastForm">
-            <h2>Add Cast</h2>
-            {{#if errorMessages.hasMessage}}
-            <div class="error" >
-                {{#if errorMessages.emptyField}}
-                    {{> emptyFieldMessage}}
-                {{/if}}
-
-                {{#if errorMessages.invalidAge}}
-                    {{> invalidAgeMessage}}
-                {{/if}}   
-
-                {{#if errorMessages.invalidImageURL}}
-                    {{> invalidImageURLMessage}}
-                {{/if}}                   
-            </div>
-            {{/if}}
+            <h2>Add Cast</h2>            
 
             <ul class="noBullet">
-                <li {{#if emptyFields.name}} class="error" {{/if}}>
+                <li {{#if errors.name}} class="error" {{/if}} >
                     <label for="name">Name:</label>
                     <input type="text" class="inputFields" id="name" name="name" value="{{inputData.name}}" />
                 </li>
 
-                <li {{#if emptyFields.age}} 
-                        class="error" 
-                    {{else}}
-                        {{#if invalidValues.age}} 
-                            class="error"
-                        {{/if}}
-                    {{/if}}>
+                <li {{#if errors.age}} class="error" {{/if}} >
                     <label for="age">Age:</label>
                     <input type="number" class="inputFields" id="age" name="age" value="{{inputData.age}}" />
                 </li>
 
-                <li {{#if emptyFields.born}} class="error" {{/if}}>
+                <li {{#if errors.born}} class="error" {{/if}} >
                     <label for="born">Born:</label>
                     <input type="text" class="inputFields" id="born" name="born" value="{{inputData.born}}" />
                 </li>
 
-                <li {{#if emptyFields.nameInMovie}} class="error" {{/if}}>
+                <li {{#if errors.nameInMovie}} class="error" {{/if}} >
                     <label for="name-in-movie">Name in Movie:</label>
                     <input type="text" class="inputFields" id="name-in-movie" name="nameInMovie" value="{{inputData.nameInMovie}}" />
                 </li>
 
-                <li {{#if emptyFields.imageURL}} 
-                        class="error" 
-                    {{else}}
-                        {{#if invalidValues.imageURL}} 
-                            class="error"
-                        {{/if}}
-                    {{/if}}>                    
+                <li {{#if errors.nameInMovie}} class="error" {{/if}} >                    
                     <label for="image">Cast Image:</label>
                     <input type="text" class="inputFields" id="image" name="imageURL" value="{{inputData.imageURL}}" />
                 </li>

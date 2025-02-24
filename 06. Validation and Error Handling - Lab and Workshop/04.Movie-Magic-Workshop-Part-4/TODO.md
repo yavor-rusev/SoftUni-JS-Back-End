@@ -3,7 +3,7 @@
     <!-- + na login -->
     <!-- + create movie -->
     <!-- + edit movie -->
-    - create cast
+    <!-- + create cast -->
     - attach cast?
 
 - prepravi vsichki templati s originalnite notifikacii
