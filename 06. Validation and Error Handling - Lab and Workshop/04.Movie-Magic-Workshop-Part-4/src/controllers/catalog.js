@@ -30,25 +30,30 @@ catalogRouter.get(
         
         search.title = search.title?.trim();
         search.genre = search.genre?.trim();
-        search.year = search.year?.trim();       
-    
-        let results = await getAllMovies();        
+        search.year = search.year?.trim();
         
-        //Filter movies by search inputs
-        if(search.title) {
-            results = results.filter(movie => movie.title.toLowerCase().includes(search.title.toLowerCase()));
-        }
-    
-        if(search.genre) {
-            results = results.filter(movie =>  movie.genre.toLowerCase() === search.genre.toLowerCase());
-        }
-    
-        if(search.year) {
-            results = results.filter(movie =>  movie.year === Number(search.year));
-        }
+        try{    
+            let results = await getAllMovies();        
+            
+            //Filter movies by search inputs
+            if(search.title) {
+                results = results.filter(movie => movie.title.toLowerCase().includes(search.title.toLowerCase()));
+            }
         
-    
-        res.render('search', { pageTitle: 'Search', search, results});
+            if(search.genre) {
+                results = results.filter(movie =>  movie.genre.toLowerCase() === search.genre.toLowerCase());
+            }
+        
+            if(search.year) {
+                results = results.filter(movie =>  movie.year === Number(search.year));
+            }            
+        
+            res.render('search', { pageTitle: 'Search', search, results});
+
+        }catch (err) {
+            console.log('searchController() ->', err.message);
+            res.render('404', { pageTitle: 'Error - ' + err.message });
+        }
     }
 );
 

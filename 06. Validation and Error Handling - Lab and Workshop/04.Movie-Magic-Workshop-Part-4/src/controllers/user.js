@@ -25,7 +25,8 @@ userRouter.post(
         .notEmpty().withMessage('Email is required').bail()
         .matches(/^[a-zA-Z0-9@.]+$/).withMessage('Email must contain only English letters and digits').bail()
         .isEmail().withMessage('Incorrect email format').bail()
-        .isLength({min: 10}).withMessage('Email must be at least 10 characters long')        
+        .isLength({min: 10}).withMessage('Email must be at least 10 characters long').bail()
+        .normalizeEmail()        
     ,
 
     //Password should consist only of English letters and digits, ans should be at least 6 characters long 
@@ -97,7 +98,8 @@ userRouter.post(
         .notEmpty().withMessage('Email is required').bail()
         .matches(/^[a-zA-Z0-9@.]+$/).withMessage('Email must contain only English letters and digits').bail()
         .isEmail().withMessage('Incorrect email format').bail()
-        .isLength({min: 10}).withMessage('Email must be at least 10 characters long')        
+        .isLength({min: 10}).withMessage('Email must be at least 10 characters long').bail()
+        .normalizeEmail()
     ,
 
     //Password should consist only of English letters and digits, ans should be at least 6 characters long 

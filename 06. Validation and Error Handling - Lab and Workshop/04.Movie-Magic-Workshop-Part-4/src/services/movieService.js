@@ -67,15 +67,11 @@ async function deleteMovie(movieId, userId) {
     await MovieModel.findByIdAndDelete(movieId);
 }
 
-async function attachCastToMovie(movieId, castId, userId) {
+async function attachCastToMovie(movieId, castId) {
     const movieProxy = await MovieModel.findById(movieId);
     
     if(!movieProxy) {
-        throw new Error(`Movie ${movieId} not found`);
-    }
-
-    if(movieProxy.author.toString() !== userId) {
-        throw new Error('Access denied');
+        throw new Error('Movie not found');
     }
 
     //Check if cast is already attached to this movie

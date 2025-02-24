@@ -4,14 +4,9 @@
         <div class="attach-form">
             <h2>{{movie.title}}</h2>
             <img class="movie" src="{{movie.imageURL}}" alt="{{movie.title}}">
-            <form {{#if emptyCast}} class="error" {{/if}} method="post">
-                {{#if emptyCast}}
-                <div class="error">                    
-                    {{> emptyCastMessage}}                                        
-                </div>
-                {{/if}}
 
-                <label {{#if emptyCast}} class="select" {{/if}} for="cast">Cast</label>
+            <form {{#if errors}} class="error" {{/if}} method="post">
+                <label {{#if errors}} class="select" {{/if}} for="cast">Cast</label>
                 <select id="cast" name="cast">
                     <option value="none" selected>--------</option>
 

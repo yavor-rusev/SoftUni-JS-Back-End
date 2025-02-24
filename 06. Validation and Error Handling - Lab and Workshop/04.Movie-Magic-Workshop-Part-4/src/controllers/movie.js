@@ -264,35 +264,35 @@ movieRouter.get(
     
             res.status(400).end();
             return;
-        }
-    
-        let movie; 
+        }         
     
         try{
-            movie = await getMovieById(movieId);
+            const movie = await getMovieById(movieId);
     
             // Check if movie exist
             if(!movie) {
                 throw new Error('Movie not found');            
             }
+
+            // Check if user is author           
+            const isAuthor = req.user && req.user._id === movie.author.toString();
+        
+            if (!isAuthor) {
+                throw new Error('Access denied');                
+            }
+    
+            res.render('movie-delete', {pageTitle: 'Delete Movie', movie});
             
-        } catch(err) {
-            console.log('deleteGet() ->', err.message);
-            
-            res.render('404', { pageTitle: 'Error - ' + err.message });
-            return;
-        }
-    
-        // Check if user is author           
-        const isAuthor = req.user && req.user._id === movie.author.toString();
-    
-        if (!isAuthor) {
-            res.redirect('/login');
-            return;
-        }
-    
-        res.render('movie-delete', {pageTitle: 'Delete Movie', movie});
-    
+        }catch(err) {
+            console.log('catched delete-movie get error');
+
+            if(err.message === 'Access denied') {
+                res.redirect('/login');
+
+            } else{
+                res.render('404', { pageTitle: 'Error - ' + err.message });
+            }            
+        }    
     }
 );
 
