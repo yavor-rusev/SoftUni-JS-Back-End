@@ -41,12 +41,12 @@ castRouter.post(
 
     // Name-in-movie must be at least 5 characters long, which could be English letters, digits, "-" and whitespaces
     body('nameInMovie').trim()
-        .notEmpty().withMessage('Name-in-movie is required').bail()
-        .matches(/^[a-zA-Z0-9\- ]+$/).withMessage('Name-in-movie must contain only English letters, digits, "-" and whitespaces').bail()
-        .isLength({min: 5}).withMessage('Name-in-movie must be at least 5 characters long')        
+        .notEmpty().withMessage('Name-in-Movie is required').bail()
+        .matches(/^[a-zA-Z0-9\- ]+$/).withMessage('Name-in-Movie must contain only English letters, digits, "-" and whitespaces').bail()
+        .isLength({min: 5}).withMessage('Name-in-Movie must be at least 5 characters long')        
     ,
 
-    // Cast image  URL should start with http://... or https://...
+    // Cast image URL should start with http://... or https://...
     body('imageURL').trim()
         .notEmpty().withMessage('Cast image URL is required').bail()
         .matches(/^https?:\/\/.+/).withMessage('Cast image URL should start with http://... or https://...')             

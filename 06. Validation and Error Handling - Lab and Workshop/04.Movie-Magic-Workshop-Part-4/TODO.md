@@ -7,7 +7,8 @@
     <!-- + attach cast --> 
 
 - napravi Mongoose validaciite
-
-- dovurshi parseError()
+  <!-- + User -->
+  <!-- + Movie -->
+  <!-- + Cast -->
 
 - napravi movie._v da se inkrementira v bazata pri editvane?

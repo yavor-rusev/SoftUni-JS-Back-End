@@ -10,6 +10,19 @@ async function register(email, password) {
         throw new Error('Email is already used');
     }
 
+    /* If there is no express validation and password is hashed before passed to Mongoose
+
+    //Password should be at least 6 characters long
+    if(password.length < 6) {
+        throw new Error('Password must be at least 6 characters long');
+    }
+    
+    // Password should consist only of English letters and digits 
+    if(!(/^[a-zA-Z0-9]+$/.test(password))) {
+        throw new Error('Password must contain only English letters and digits');
+    }
+    */
+
     // create database record proxy with hashed password
     const user = new UserModel({
         email,        
@@ -30,6 +43,20 @@ async function login(email, password) {
     if(!user) {        
         throw new Error('Incorrect email or password!');
     }
+
+    
+    /* If there is no express validation and password is hashed before passed to Mongoose
+
+    //Password should be at least 6 characters long
+    if(password.length < 6) {
+        throw new Error('Password must be at least 6 characters long');
+    }
+    
+    // Password should consist only of English letters and digits 
+    if(!(/^[a-zA-Z0-9]+$/.test(password))) {
+        throw new Error('Password must contain only English letters and digits');
+    }
+    */    
 
     // compare hashed passwords - throw error if false
     const passwordsMatch = await bcrypt.compare(password, user.password);

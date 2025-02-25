@@ -13,6 +13,12 @@ function parseError(err) {
         } else {
             // Mongoose error
             console.log('Mongoose error ->', err);
+
+            const arr = Object.values(err.errors);
+            const errors = Object.fromEntries(arr.map(e => [e.path, [e.message]]));
+            
+            console.log('Mongoose error parsed ->', errors);
+            return errors;
         }
 
     }else if (Array.isArray(err)) {

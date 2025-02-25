@@ -20,16 +20,16 @@ userRouter.post(
     '/register',
     isGuest(),
 
-    //Email should end in @x.x, where x is one or more English letters/digits and should be at least 10 characters long
+    //Email should end in @x.x, where x is one or more English letters, digits and ".", and should be at least 10 characters long
     body('email').trim()
         .notEmpty().withMessage('Email is required').bail()
-        .matches(/^[a-zA-Z0-9@.]+$/).withMessage('Email must contain only English letters and digits').bail()
+        .matches(/^[a-zA-Z0-9]+@[a-zA-Z0-9]+(?:\.[a-zA-Z0-9]+)*\.[a-zA-Z]{2,}$/).withMessage('Email must contain only English letters, digits and "."').bail()
         .isEmail().withMessage('Incorrect email format').bail()
         .isLength({min: 10}).withMessage('Email must be at least 10 characters long').bail()
-        .normalizeEmail()        
+        .normalizeEmail()
     ,
 
-    //Password should consist only of English letters and digits, ans should be at least 6 characters long 
+    //Password should consist only of English letters and digits, and should be at least 6 characters long 
     body('password').trim()
         .notEmpty().withMessage('Password is required').bail()
         .isAlphanumeric().withMessage('Password must contain only English letters and digits').bail()
@@ -93,16 +93,16 @@ userRouter.post(
     '/login',
     isGuest(),
 
-    //Email should end in @x.x, where x is one or more English letters/digits and should be at least 10 characters long
+    //Email should end in @x.x, where x is one or more English letters, digits and ".", and should be at least 10 characters long
     body('email').trim()
         .notEmpty().withMessage('Email is required').bail()
-        .matches(/^[a-zA-Z0-9@.]+$/).withMessage('Email must contain only English letters and digits').bail()
+        .matches(/^[a-zA-Z0-9]+@[a-zA-Z0-9]+(?:\.[a-zA-Z0-9]+)*\.[a-zA-Z]{2,}$/).withMessage('Email must contain only English letters, digits and "." ').bail()
         .isEmail().withMessage('Incorrect email format').bail()
         .isLength({min: 10}).withMessage('Email must be at least 10 characters long').bail()
         .normalizeEmail()
     ,
 
-    //Password should consist only of English letters and digits, ans should be at least 6 characters long 
+    //Password should consist only of English letters and digits, and should be at least 6 characters long 
     body('password').trim()
         .notEmpty().withMessage('Password is required').bail()
         .isAlphanumeric().withMessage('Password must contain only English letters and digits').bail()
