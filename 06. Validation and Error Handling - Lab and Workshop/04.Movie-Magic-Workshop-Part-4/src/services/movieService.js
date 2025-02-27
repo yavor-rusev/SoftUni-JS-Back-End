@@ -90,7 +90,7 @@ async function removeCastFromMovie(movieId, castId) {
     const movieProxy = await MovieModel.findById(movieId);
     
     if(!movieProxy) {
-        throw new Error(`Movie ${movieId} not found`);
+        throw new Error(`Movie ${movieId} not found by removeCastFromMovie()`);
     }    
 
     const castIndex = movieProxy.cast.indexOf(castId);
