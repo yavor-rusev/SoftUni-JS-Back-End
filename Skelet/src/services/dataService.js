@@ -78,6 +78,32 @@ async function deleteById(recordId, userId) {
     await record.deleteOne(); 
 }
 
+
+async function searchData(input1, input2, selectOption) {
+    const query = {};
+
+    //TODO change logic depending on exam description
+
+    if(input1) {
+        // new RegExp(string) -> returns '/<string>/i' regex for partial match. 'i' -> flag for case insensitive search
+        query.name = new RegExp(input1, 'i');
+    }
+
+    if(input2) {
+        query.category = new RegExp(input2, 'i');
+    }
+
+    if(selectOption != '---' && selectOption != '') {
+        // new RegExp(`^${string}$`) -> returns '/^<string>$/i' regex for whole match. 'i' -> flag for case insensitive search
+        query.location = new RegExp(`^${selectOption}$`, 'i');
+    }
+
+    // Passed conditions are property's regex values in the <query> object 
+    const stones = await DataModel.find(query).lean(); 
+
+    return stones;    
+}
+
 async function like(recordId, userId) {
     const record = await DataModel.findById(recordId);
 
@@ -111,5 +137,6 @@ module.exports = {
     getById,
     editById,
     deleteById,
+    searchData,
     like
 };

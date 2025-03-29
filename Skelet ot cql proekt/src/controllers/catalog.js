@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const { getRecent, getAll, getById } = require('../services/stoneService');
+const { getRecent, getAll, getById, searchStones } = require('../services/stoneService');
 
 const catalogRouter = Router();
 
@@ -76,16 +76,17 @@ catalogRouter.get('/search', async (req, res) => {
     
     try{
         //TODO rename params, template and pageTitle 
-        
-        //TODO change like Exam 2 - do NOT overfetch
-        let stones = await getAll();
+        const search = req.query;
+        console.log(search.name, search.category);
 
-        let search = null;
+        const name = search.name ? search.name : '';
+        const category = search.category ? search.category : '';       
+        const location = search.location ? search.location : '';       
+
+        console.log(name, category, location);
         
-        if(req.query.search) {
-            search = req.query.search.trim();           
-            stones = stones.filter(stone => stone.name.toLowerCase().startsWith(search.toLowerCase()));
-        }
+
+        const stones = await searchStones(name.trim(), category.trim(), location.trim());
 
         res.locals.pageTitle = 'Search';        
         res.render('search', {stones, search});

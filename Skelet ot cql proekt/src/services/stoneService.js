@@ -96,6 +96,33 @@ async function deleteById(stoneId, userId) {
 
 // TODO rename params depending on exam description
 
+async function searchStones(name, category, location) {
+    const query = {};
+
+    //TODO change logic depending on exam description
+
+    if(name) {
+        // new RegExp(string) -> returns '/<string>/i' regex for partial match. 'i' -> flag for case insensitive search
+        query.name = new RegExp(name, 'i');
+    }
+
+    if(category) {
+        query.category = new RegExp(category, 'i');
+    }
+
+    if(location != '---' && location != '') {
+        // new RegExp(`^${string}$`) -> returns '/^<string>$/i' regex for whole match. 'i' -> flag for case insensitive search
+        query.location = new RegExp(`^${location}$`, 'i');
+    }
+
+    // Passed conditions are property's regex values in the <query> object 
+    const stones = await StoneModel.find(query).lean(); 
+
+    return stones;    
+}
+
+// TODO rename params depending on exam description
+
 async function like(stoneId, userId) {
     const stone = await StoneModel.findById(stoneId);
 
@@ -130,5 +157,6 @@ module.exports = {
     getById,
     editById,
     deleteById,
+    searchStones,
     like
 };
