@@ -1,0 +1,40 @@
+<div class="profile-wrapper">
+    <section class="profile-hero">
+        <div class="wrap">
+            <h2>User Profile</h2>
+            <p>Welcome back, <span id="username">{{user.name}}</span> <strong id="email">( {{user.email}} )</strong></p>
+        </div>
+    </section>
+
+    <section class="added-sneakers">
+        <div class="wrap">
+            <h3>Added Sneakers</h3>
+            <div class="sneakers-list">
+                {{#if mySneakers}}
+                    {{#each mySneakers}}
+                        {{> profileCard}}
+                    {{/each}}
+                {{else}}                    
+                    <p class="no-post">You haven't added a sneakers post yet</p>
+                {{/if}}
+    
+            </div>
+        </div>
+    </section>
+    
+    <section class="preffered-snekares">
+        <div class="wrap">
+            <h3>Preferred Shoes</h3>
+            <div class="sneakers-list">
+                {{#if preferredSneakers}}
+                    {{#each preferredSneakers}}
+                        {{> profileCard}}
+                    {{/each}}
+                {{else}}                   
+                    <p class="no-post">You haven't preferred any sneakers yet</p>
+                {{/if}}     
+            </div>
+        </div>
+    </section>
+</div>
+    

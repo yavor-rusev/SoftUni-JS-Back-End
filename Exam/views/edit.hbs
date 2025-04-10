@@ -1,0 +1,50 @@
+{{#if errors}}
+    <div>
+        <div class="error-wrap">
+            {{#each errors}}
+                <p>{{this}}</p>
+            {{/each}}
+        </div>
+    </div>
+{{/if}}
+
+<div class="edit-wrapper">
+    <section class="edit-hero">
+        <div class="wrap">
+            <h2>Edit Sneakers</h2>
+        </div>
+    </section>
+
+    <section class="edit-form">
+        <div class="wrap">
+            <form  method="POST">
+                <div class="input-wrap">
+                    <div class="input-wrap">
+                        <input type="text" id="brand" name="brand" placeholder="Brand" value="{{sneaker.brand}}" >
+                    </div>
+                    <input type="text" id="model" name="model" placeholder="Model" value="{{sneaker.model}}" >
+                </div>
+                <div class="input-wrap">
+                    <input type="text" id="price" name="price" placeholder="Price" value="{{sneaker.price}}" >
+                </div>
+                <div class="input-wrap">
+                    <input type="text" id="condition" name="condition" placeholder="Condition" value="{{sneaker.condition}}" >
+                </div>
+                <div class="input-wrap">
+                    <input type="text" id="year" name="year" placeholder="Year" value="{{sneaker.year}}" >
+                </div>
+                <div class="input-wrap">
+                    <input type="text" id="size" name="size" placeholder="Size" value="{{sneaker.size}}" >
+                </div>
+                <div class="input-wrap">
+                    <input type="text" id="description" name="description" placeholder="Description" value="{{sneaker.description}}" >
+                </div>
+                <div class="input-wrap">
+                    <input type="text" id="image" name="image" placeholder="ImageUrl" value="{{sneaker.image}}" >
+                </div>
+                <button type="submit" class="btn">Edit</button>
+            </form>
+        </div>
+    </section>
+</div>
+    

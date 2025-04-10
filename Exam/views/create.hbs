@@ -1,0 +1,50 @@
+{{#if errors}}
+    <div>
+        <div class="error-wrap">
+            {{#each errors}}
+                <p>{{this}}</p>
+            {{/each}}
+        </div>
+    </div>
+{{/if}}
+
+<div class="create-wrapper">
+    <section class="create-hero">
+        <div class="wrap">
+            <h2>Add Sneakers</h2>
+        </div>
+    </section>
+
+    <section class="create-form">
+        <div class="wrap">
+            <form  method="POST">
+                <div class="input-wrap">
+                    <input type="text" id="brand" name="brand" placeholder="Brand" {{#if data.brand}} value="{{data.brand}}" {{/if}} >
+                </div>
+                <div class="input-wrap">
+                    <input type="text" id="model" name="model" placeholder="Model" {{#if data.model}} value="{{data.model}}" {{/if}} >
+                </div>
+                <div class="input-wrap">
+                    <input type="number" id="price" name="price" placeholder="Price" {{#if data.price}} value="{{data.price}}" {{/if}} >
+                </div>
+                <div class="input-wrap">
+                    <input type="text" id="condition" name="condition" placeholder="Condition" {{#if data.condition}} value="{{data.condition}}" {{/if}} >
+                </div>
+                <div class="input-wrap">
+                    <input type="number" id="year" name="year" placeholder="Year" {{#if data.year}} value="{{data.year}}" {{/if}} >
+                </div>
+                <div class="input-wrap">
+                    <input type="number" id="size" name="size" placeholder="Size" {{#if data.size}} value="{{data.size}}" {{/if}} >
+                </div>
+                <div class="input-wrap">
+                    <input type="text" id="image" name="image" placeholder="ImageUrl" {{#if data.image}} value="{{data.image}}" {{/if}}>
+                </div>
+                <div class="input-wrap">
+                    <input type="text" id="description" name="description" placeholder="Description" {{#if data.description}} value="{{data.description}}" {{/if}} >
+                </div>
+                <button type="submit" class="btn">Add</button>
+            </form>
+        </div>
+    </section>
+</div>
+   

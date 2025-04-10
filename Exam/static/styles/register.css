@@ -1,0 +1,75 @@
+.register-hero {
+    text-align: center;
+    color: #fff;
+}
+
+.register-hero h2 {
+    margin: 0 0 10px;
+    font-size: 3rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+
+.register-form {
+    padding: 2rem 0;
+}
+
+.register-form .wrap {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    background: rgb(232,147,252);
+    background: linear-gradient(214deg, rgba(232,147,252,1) 0%, rgba(38,212,219,1) 81%);
+    border: 5px solid black;
+    margin-bottom: 30vh;
+}
+
+.register-form .input-wrap {
+    margin-bottom: 15px;
+}
+
+.register-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.register-form input {
+    width: 96%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.register-form .btn {
+    width: 100%;
+    padding: 10px;
+    background: #0073e6;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.register-form .btn:hover {
+    background: #005bb5;
+    transform: translateY(-5px);
+}
+
+.register-form p {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.register-form p a {
+    color: #0073e6;
+    text-decoration: none;
+}
+
+.register-form p a:hover {
+    text-decoration: underline;
+}

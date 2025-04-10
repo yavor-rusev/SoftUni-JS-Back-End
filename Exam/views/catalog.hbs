@@ -1,0 +1,16 @@
+<section class="catalog">
+    <h2 class="heading-catalog">Catalog</h2>
+    <div class="wrap">
+        <div class="sneaker-catalog">
+            {{#if sneakers}}
+                {{#each sneakers}}
+                    {{> sneaker}}
+                {{/each}}
+            {{else}}
+                <p class="no-post">There haven't been any sneakers posted yet.</p>
+            {{/if}}
+        </div>
+    </div>
+</section>
+
+   

@@ -1,0 +1,70 @@
+.catalog{
+  background: rgb(232,147,252);
+  background: linear-gradient(214deg, rgba(232,147,252,1) 0%, rgba(38,212,219,1) 81%);
+}
+.heading-catalog{
+  margin: 0;
+  text-align: center;
+  font-size: 53px;
+}
+
+.catalog-hero p {
+  margin: 0 0 20px;
+  font-size: 1.2rem;
+  color: #0073e6;
+  font-weight: bold;
+}
+
+.catalog .sneaker-catalog {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.catalog .sneakers-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #dbd8d8;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 40vw;
+  height: 60vh;
+}
+
+.catalog .sneakers-item:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.catalog .sneakers-item img {
+  height: 50vh;
+  border-bottom: 1px solid #ddd;
+  transition: transform 0.3s ease;
+}
+
+.catalog .sneakers-item:hover img {
+  transform: scale(1.05);
+}
+
+
+
+.sneaker-catalog .no-post {
+  margin: 6.75rem;
+  font-size: 40px;
+}
+
+.btn {
+  background: #0073e6;
+  color: #fff;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.btn:hover {
+  background: #005bb5;
+  transform: translateY(-5px);
+}

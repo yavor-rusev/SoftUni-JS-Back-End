@@ -1,0 +1,35 @@
+{{#if errors}}
+    <div>
+        <div class="error-wrap">
+            {{#each errors}}
+                <p>{{this}}</p>
+            {{/each}}
+        </div>
+    </div>
+{{/if}}
+
+<section class="hero">
+    <div class="hero-wrap">
+        <h2>Welcome to Sneakers Paradise</h2>
+        <p>Where Style Meets Comfort!</p>
+        <a href="/catalog" class="btn">Shop Now</a>
+    </div>
+</section>
+
+<section class="sneakers">
+    <div class="wrap">
+        <h2>Featured Sneakers</h2>
+        <div class="sneaker-catalog">
+            {{#if sneakers}}
+                {{#each sneakers}}
+                    {{> card}}
+                {{/each}}
+            {{else}}
+                <p class="no-post">There haven't been any Sneakers posted yet.</p>
+            {{/if}}
+        </div>
+    </div>
+
+
+</section>
+
